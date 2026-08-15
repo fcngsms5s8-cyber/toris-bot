@@ -1,50 +1,26 @@
-import speech_recognition as sr
-import pyttsx3
+def robot_reply(message):
+    message = message.lower()
 
-# Set up the robot's voice
-robot = pyttsx3.init()
-robot.setProperty("rate", 170)
+    if "hello" in message:
+        return "Hello! 👋"
+    elif "your name" in message:
+        return "I'm your robot!"
+    elif "how are you" in message:
+        return "I'm doing great!"
+    elif "bye" in message:
+        return "Goodbye!"
+    else:
+        return "You said: " + message
 
-def speak(text):
-    print("Robot:", text)
-    robot.say(text)
-    robot.runAndWait()
 
-# Set up microphone and speech recognition
-recognizer = sr.Recognizer()
-
-speak("Hello! I am ready to listen.")
+print("Robot: Hi! Type something to me.")
+print("Type 'quit' to stop.\n")
 
 while True:
-    try:
-        with sr.Microphone() as source:
-            print("Listening...")
-            recognizer.adjust_for_ambient_noise(source, duration=0.5)
-            audio = recognizer.listen(source)
+    message = input("You: ")
 
-        command = recognizer.recognize_google(audio)
-        print("You:", command)
+    if message.lower() == "quit":
+        print("Robot: Goodbye!")
+        break
 
-        if command.lower() in ["stop", "goodbye", "shut down"]:
-            speak("Goodbye!")
-            break
-
-        # Basic responses
-        if "hello" in command.lower():
-            speak("Hello! Nice to meet you.")
-
-        elif "your name" in command.lower():
-            speak("I am your robot.")
-
-        elif "how are you" in command.lower():
-            speak("I am doing great!")
-
-        else:
-            speak("You said " + command)
-
-    except sr.UnknownValueError:
-        speak("Sorry, I didn't understand that.")
-
-    except sr.RequestError:
-        speak("I can't connect to the speech recognition service.")# toris-botpip install SpeechRecognition pyttsx3
-pip install PyAudiopython robot.py
+    print("Robot:", robot_reply(message))
