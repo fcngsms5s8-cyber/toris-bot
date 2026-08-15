@@ -46,4 +46,5 @@ while True:
         speak("Sorry, I didn't understand that.")
 
     except sr.RequestError:
-        speak("I can't connect to the speech recognition service.")# toris-bot
+        speak("I can't connect to the speech recognition service.")# toris-botpip install SpeechRecognition pyttsx3
+pip install PyAudiopython robot.py
